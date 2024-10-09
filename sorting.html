@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithms</title>
+    <h1 font size="2"><p>Bubble Sort is a simple sorting algorithm that works by repeatedly stepping through the list, 
+        comparing adjacent elements, and swapping them if they are in the wrong order
+      </p><hr></h1>
+    <h2> <p>Insertion Sort is a simple and intuitive sorting algorithm that builds a sorted array (or list) one element at a time.
+        It is much like the way you might sort playing cards in your hands.
+   </p> <hr></h2>  
+   <h3><p>Counting Sort is a non-comparison-based sorting algorithm that is particularly effective for sorting integers or objects that can be mapped to integers. 
+    It is efficient when the range of the input values (the difference between the maximum and minimum values) is not significantly greater than the number of elements to be sorted.
+    </p></h3>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: bisque;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: black;
+            font-size: 2em;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: medium;
+            font-weight: 100;
+            text-align: center;
+            color: whitesmoke;
+            background-color: cornflowerblue;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: deepskyblue;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sorting Algorithms</h1>
+    <p>Select a sorting algorithm and enter the elements  to sort.</p>
+
+    <div class="container">
+        <label for="arrayInput">Enter elements:</label>
+        <input type="text" id="arrayInput" placeholder="1,3,4,5,2,8">
+        
+        <label for="sortMethod">Select sorting method:</label>
+        <select id="sortMethod">
+            <option value="bubble">Bubble Sort</option>
+            <option value="insertion">Insertion Sort</option>
+            <option value="counting">Counting Sort</option>
+        </select>
+        
+        <button class="btn" onclick="sortArray()">Sort</button>
+    </div>
+    
+    <div class="result" id="result"></div>
+
+    <script>
+        function bubbleSort(arr) {
+            const n = arr.length;
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - 1 - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                    }
+                }
+            }
+            return arr;
+        }
+
+        function countingSort(arr) {
+            const max = Math.max(...arr);
+            const count = new Array(max + 1).fill(0);
+            for (let num of arr) {
+                count[num]++;
+            }
+            const output = [];
+            for (let i = 0; i < count.length; i++) {
+                while (count[i] > 0) {
+                    output.push(i);
+                    count[i]--;
+                }
+            }
+            return output;
+        }
+
+        function insertionSort(arr) {
+            for (let i = 1; i < arr.length; i++) {
+                let key = arr[i];
+                let j = i - 1;
+                while (j >= 0 && arr[j] > key) {
+                    arr[j + 1] = arr[j];
+                    j--;
+                }
+                arr[j + 1] = key;
+            }
+            return arr;
+        }
+
+        function sortArray() {
+            const input = document.getElementById('arrayInput').value;
+            const array = input.split(',')
+                .map(num => parseInt(num.trim(), 10))
+                .filter(num => !isNaN(num)); // Filter out invalid numbers
+
+            // Ensure the array is not empty before sorting
+            if (array.length === 0) {
+                document.getElementById('result').innerText = 'Please enter valid numbers.';
+                return;
+            }
+
+            const sortMethod = document.getElementById('sortMethod').value;
+            let sortedArray;
+
+            switch (sortMethod) {
+                case 'bubble':
+                    sortedArray = bubbleSort(array);
+                    break;
+                case 'insertion':
+                    sortedArray = insertionSort(array);
+                    break;
+                case 'counting':
+                    sortedArray = countingSort(array);
+                    break;
+                default:
+                    sortedArray = array; // Fallback
+            }
+
+            document.getElementById('result').innerText = 'Sorted array: ' + sortedArray.join(', ');
+        }
+    </script>
+</body>
+</html>
