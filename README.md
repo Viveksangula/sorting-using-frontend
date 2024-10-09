@@ -4,3 +4,4 @@ created css for more visualisation.
 for logic we used javascript.
 the contributors for this repository are: Viveksangula
                                           Soumyasri19
+                                          Srujanakutty
