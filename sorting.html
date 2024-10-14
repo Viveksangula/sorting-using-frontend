@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorting Algorithms</title>
-    <h1 font size="2"><p>Bubble Sort is a simple sorting algorithm that works by repeatedly stepping through the list, 
-        comparing adjacent elements, and swapping them if they are in the wrong order
-      </p><hr></h1>
-    <h2> <p>Insertion Sort is a simple and intuitive sorting algorithm that builds a sorted array (or list) one element at a time.
-        It is much like the way you might sort playing cards in your hands.
-   </p> <hr></h2>  
-   <h3><p>Counting Sort is a non-comparison-based sorting algorithm that is particularly effective for sorting integers or objects that can be mapped to integers. 
-    It is efficient when the range of the input values (the difference between the maximum and minimum values) is not significantly greater than the number of elements to be sorted.
-    </p></h3>
+    <a href="./BUBBLE SORT.html">bubbleSort</a>
+    <a href="./INSERTION SORT.html">insertionSort</a>
+    <a href="./COUNTING SORT.html">countingSort</a>
+
     <style>
         body {
             font-family: 'Times New Roman', Times, serif;
@@ -125,9 +120,9 @@
             const input = document.getElementById('arrayInput').value;
             const array = input.split(',')
                 .map(num => parseInt(num.trim(), 10))
-                .filter(num => !isNaN(num)); // Filter out invalid numbers
+                .filter(num => !isNaN(num)); 
 
-            // Ensure the array is not empty before sorting
+            
             if (array.length === 0) {
                 document.getElementById('result').innerText = 'Please enter valid numbers.';
                 return;
